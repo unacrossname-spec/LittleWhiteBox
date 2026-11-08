@@ -2348,7 +2348,9 @@ async function importGlobalTasks(file) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function clearProcessedMessages() {
-    getSettings().processedMessages = [];
+    const settings = getSettings();
+    if (settings.processedMessages.length === 0 && state.processedMessagesSet.size === 0) return;
+    settings.processedMessages = [];
     state.processedMessagesSet.clear();
     saveSettingsDebounced();
 }

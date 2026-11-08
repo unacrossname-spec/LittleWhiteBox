@@ -1306,6 +1306,28 @@ test('pending global metadata is not executable, and closing cannot affect a new
     assert.equal(h.win.signals.old.aborted, true);
 });
 
+test('clearing processed messages saves only when there is something to clear', t => {
+    const h = harness(t);
+    const settings = h.extensions.extension_settings.test.tasks;
+    const initialSaves = h.settingsSaves();
+    h.win.clearTasksProcessedMessages();
+    assert.equal(h.settingsSaves(), initialSaves);
+
+    settings.processedMessages.push('chat_1');
+    h.api.state.processedMessagesSet.add('chat_1');
+    h.win.clearTasksProcessedMessages();
+    assert.equal(settings.processedMessages.length, 0);
+    assert.equal(h.api.state.processedMessagesSet.size, 0);
+    assert.equal(h.settingsSaves(), initialSaves + 1);
+    h.win.clearTasksProcessedMessages();
+    assert.equal(h.settingsSaves(), initialSaves + 1);
+
+    h.api.state.processedMessagesSet.add('cache-only');
+    h.win.clearTasksProcessedMessages();
+    assert.equal(h.api.state.processedMessagesSet.size, 0);
+    assert.equal(h.settingsSaves(), initialSaves + 2);
+});
+
 test('retiring character consent preserves unrelated data and does not recreate permission settings', async t => {
     const h = harness(t, {
         initialSettings: { character_allowed_tasks: ['test.png'] },

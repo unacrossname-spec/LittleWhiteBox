@@ -4626,7 +4626,7 @@
       "publicPath": "scripts/extensions/third-party/LittleWhiteBox/modules/scheduled-tasks/preset-lifecycle.test.js",
       "relativePath": "modules/scheduled-tasks/preset-lifecycle.test.js",
       "extension": ".js",
-      "sizeBytes": 166891
+      "sizeBytes": 167831
     },
     {
       "source": "littlewhitebox",
@@ -4640,7 +4640,7 @@
       "publicPath": "scripts/extensions/third-party/LittleWhiteBox/modules/scheduled-tasks/scheduled-tasks.js",
       "relativePath": "modules/scheduled-tasks/scheduled-tasks.js",
       "extension": ".js",
-      "sizeBytes": 144502
+      "sizeBytes": 144631
     },
     {
       "source": "littlewhitebox",
